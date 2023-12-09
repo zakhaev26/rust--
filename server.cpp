@@ -7,20 +7,43 @@ using json = nlohmann::json;
 
 
 void SolvePath(const Request &req, Response &res) {
-    std::cout<<req.body<<std::endl;
+    std::cout<<"AYA"<<std::endl;
 
-    json reqBody = json::parse(req.body);
+    try{
+        json reqBody = json::parse(req.body);
+    }   
+    catch(std::exception &e) {
+        std::cout<<e.what();
+    }
+    system("wget https://v2.jokeapi.dev/joke/Programming,Dark?type=single -O joke.json");
+    std::ifstream infile;
+    infile.open("joke.json");
 
+    if(!infile) {
+        res.set_content("Error Opening WGET RES","application/json");
+    }
+    else{
+        std::stringstream buffer;
+        buffer << infile.rdbuf(); // Read the entire file into the buffer
+        infile.close();
+
+        std::string fileContent = buffer.str();
+        json JOKE = json::parse(fileContent);
+        std::cout<<"Joke ->"<<JOKE<<std::endl;
+        res.set_content(JOKE.dump(),"application/json");
+    }
+
+ /*   
     if(reqBody.contains("List") && reqBody.contains("Edges")) {
-        res.body.append("OK");
+        reqBody.emplace("SentBy","C++ Server");
         res.set_content(reqBody.dump(),"application/json");
     }
 
     else {
         res.status = 400;
-        res.set_content("Bad Request.","text/plain");
-    
+        res.set_content("Bad Request.","text/plain");       
     }
+*/
 }
 
 int main()
@@ -28,7 +51,7 @@ int main()
 
     Server server;
 
-    server.Post("/algo",SolvePath);
+    server.Get("/algo",SolvePath);
 
     
 

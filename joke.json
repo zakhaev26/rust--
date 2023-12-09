@@ -1,0 +1,17 @@
+{
+    "error": false,
+    "category": "Dark",
+    "type": "single",
+    "joke": "Nowadays people are so sensitive, you can't even say \"black paint\" anymore.\nInstead, you have to say \"Jamal, please paint the fence\".",
+    "flags": {
+        "nsfw": false,
+        "religious": false,
+        "political": false,
+        "racist": true,
+        "sexist": false,
+        "explicit": false
+    },
+    "id": 133,
+    "safe": false,
+    "lang": "en"
+}
