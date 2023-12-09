@@ -1,6 +1,5 @@
-#include <bits/stdc++.h>
-#include <httplib.h>
-#include "Runner.h"
+#include<bits/stdc++.h>
+#include<httplib.h>
 #include<nlohmann/json.hpp>
 using namespace httplib;
 using json = nlohmann::json;
@@ -30,8 +29,8 @@ void SolvePath(const Request &req, Response &res) {
         std::string fileContent = buffer.str();
         json JOKE = json::parse(fileContent);
         std::cout<<"Joke ->"<<JOKE<<std::endl;
-        res.set_content(JOKE.dump(),"application/json");
-    }
+        res.set_content(JOKE["joke"].dump(),"application/json");
+    }   
 
  /*   
     if(reqBody.contains("List") && reqBody.contains("Edges")) {
@@ -55,7 +54,7 @@ int main()
 
     
 
-    Dijkstra Graph;
+    // Dijkstra Graph;
     // int num_edges;
     // std::cin >> num_edges;
 
